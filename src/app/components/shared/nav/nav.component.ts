@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,6 +10,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './nav.component.scss',
 })
 export class NavComponent {
+  isDarkMode: boolean = false;
+  themeService = inject(ThemeService);
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    this.themeService.toggleTheme(this.isDarkMode);
+  }
+
   toggleHidden() {
     document.getElementById('menu-toggle')?.classList.toggle('hidden');
   }
